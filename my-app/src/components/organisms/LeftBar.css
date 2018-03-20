@@ -1,0 +1,19 @@
+.navigation-list {
+    list-style-type: none ;
+    padding-left: 0;
+    margin: 0;
+}
+.navigation-list li {
+    margin: 33px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 31px;
+}
+.navigation-list li .nav-active i {
+  color: #ffffff;
+}
+.navigation-list li i {
+    font-size: 31px;
+    color: #757da4;
+}
