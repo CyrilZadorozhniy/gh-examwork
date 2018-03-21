@@ -4,7 +4,7 @@ import Logo from '../../assets/img/logo.png'
 
 const styles = {
     inkStyle: {
-        marginLeft: 100 / 2 +"%",
+        marginLeft: 100 / 2 + "%",
     }
 };
 
@@ -20,6 +20,7 @@ class Initialization extends React.Component {
             passwordLogin: '',
         };
     }
+
     tabsClick = (value) => {
         this.setState({
             tabs: value
@@ -34,7 +35,7 @@ class Initialization extends React.Component {
 
     handleSubmitRegister = (e) => {
         e.preventDefault();
-        const { history } = this.props;
+        const {history} = this.props;
         let registerDate = {
             username: this.state.usernameRegister,
             pass: this.state.passwordRegister
@@ -49,10 +50,10 @@ class Initialization extends React.Component {
             .then(res => {
                 return res.json();
             })
-            .then(res=> {
+            .then(res => {
                 localStorage.setItem("token", JSON.stringify(res.token));
-                localStorage.setItem("username",JSON.stringify(res.username));
-                this.setState ({
+                localStorage.setItem("username", JSON.stringify(res.username));
+                this.setState({
                     usernameRegister: '',
                     passwordRegister: '',
                     tabs: 'b',
@@ -63,7 +64,7 @@ class Initialization extends React.Component {
     };
     handleSubmitLogin = (e) => {
         e.preventDefault();
-        const { history } = this.props;
+        const {history} = this.props;
         let loginDate = {
             username: this.state.usernameLogin,
             pass: this.state.passwordLogin,
@@ -78,16 +79,16 @@ class Initialization extends React.Component {
             .then(res => {
                 return res.json();
             })
-            .then (res => {
+            .then(res => {
                 if (res.check) {
-                    this.setState ({
+                    this.setState({
                         usernameLogin: '',
                         passwordLogin: '',
                     });
-                    localStorage.setItem("token",JSON.stringify(res.token));
-                    localStorage.setItem("username",JSON.stringify(res.username));
+                    localStorage.setItem("token", JSON.stringify(res.token));
+                    localStorage.setItem("username", JSON.stringify(res.username));
                     history.push('/');
-                } else  {
+                } else {
                     alert('username or password is not correct');
                 }
             });
@@ -96,15 +97,15 @@ class Initialization extends React.Component {
 
 
     render() {
-        // const { history } = this.props;
-        // let tokenKey = JSON.parse(localStorage.getItem("token"));
-        // if (tokenKey) {
-        //     history.push('/');
-        // }
-        // document.getElementsByTagName('title')[0].text = 'Initialization';
+        const {history} = this.props;
+        let tokenKey = JSON.parse(localStorage.getItem("token"));
+        if (tokenKey) {
+            history.push('/');
+        }
+        document.getElementsByTagName('title')[0].text = 'Initialization';
 
         return (
-            <div  className="initialization-site">
+            <div className="initialization-site">
                 <div className="initialization-body">
                     <header className="initialization-header">
                         <div className="wrap-logo">
@@ -116,7 +117,7 @@ class Initialization extends React.Component {
                                 <li onClick={() => this.tabsClick('b')}>Login</li>
                             </ul>
                             <div className="inkbar">
-                                <span  style={this.state.tabs === 'b' ? styles.inkStyle : null }> </span>
+                                <span style={this.state.tabs === 'b' ? styles.inkStyle : null}> </span>
                             </div>
                         </div>
                     </header>
@@ -126,12 +127,14 @@ class Initialization extends React.Component {
                                 <form onSubmit={this.handleSubmitRegister}>
                                     <h2>Register </h2>
                                     <label className="username-ico">
-                                        <input  name="usernameRegister" value={this.state.usernameRegister} onChange={this.handleChange} placeholder="Username"/>
+                                        <input name="usernameRegister" value={this.state.usernameRegister}
+                                               onChange={this.handleChange} placeholder="Username"/>
                                     </label>
                                     <label className="password-ico">
-                                        <input   name="passwordRegister" value={this.state.passwordRegister} onChange={this.handleChange} type="password" placeholder="Password"/>
+                                        <input name="passwordRegister" value={this.state.passwordRegister}
+                                               onChange={this.handleChange} type="password" placeholder="Password"/>
                                     </label>
-                                    <button className="submit-btn" type="submit" >Enter</button>
+                                    <button className="submit-btn" type="submit">Enter</button>
                                 </form>
                             </div>
                             :
@@ -139,12 +142,14 @@ class Initialization extends React.Component {
                                 <form onSubmit={this.handleSubmitLogin}>
                                     <h2>Welcome <span>back!</span></h2>
                                     <label className="username-ico">
-                                        <input  name="usernameLogin" value={this.state.usernameLogin} onChange={this.handleChange} placeholder="Username"/>
+                                        <input name="usernameLogin" value={this.state.usernameLogin}
+                                               onChange={this.handleChange} placeholder="Username"/>
                                     </label>
                                     <label className="password-ico">
-                                        <input   name="passwordLogin" value={this.state.passwordLogin} onChange={this.handleChange} type="password" placeholder="Password"/>
+                                        <input name="passwordLogin" value={this.state.passwordLogin}
+                                               onChange={this.handleChange} type="password" placeholder="Password"/>
                                     </label>
-                                    <button className="submit-btn" type="submit" >Enter</button>
+                                    <button className="submit-btn" type="submit">Enter</button>
                                 </form>
                             </div>
                         }

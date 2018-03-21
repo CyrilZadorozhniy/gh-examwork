@@ -10,6 +10,9 @@ class HeaderSite extends React.Component {
                     <img src={ Logo } alt=""/>
                     <h1>qwe</h1>
                 </div>
+                <div className="header-right-side">
+
+                </div>
             </header>
         )
     }
