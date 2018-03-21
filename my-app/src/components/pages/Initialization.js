@@ -35,6 +35,9 @@ class Initialization extends React.Component {
 
     handleSubmitRegister = (e) => {
         e.preventDefault();
+        if (this.state.usernameRegister === '' || this.state.passwordRegister === ''  ) {
+            return alert('Your fields are empty')
+        }
         const {history} = this.props;
         let registerDate = {
             username: this.state.usernameRegister,
@@ -51,19 +54,26 @@ class Initialization extends React.Component {
                 return res.json();
             })
             .then(res => {
-                localStorage.setItem("token", JSON.stringify(res.token));
-                localStorage.setItem("username", JSON.stringify(res.username));
-                this.setState({
-                    usernameRegister: '',
-                    passwordRegister: '',
-                    tabs: 'b',
-                });
-                history.push('/');
+                if (res.check) {
+                    localStorage.setItem("token", JSON.stringify(res.token));
+                    localStorage.setItem("username", JSON.stringify(res.username));
+                    this.setState({
+                        usernameRegister: '',
+                        passwordRegister: '',
+                        tabs: 'b',
+                    });
+                    history.push('/');
+                } else {
+                    return alert('The secret login is already registered')
+                }
             });
 
     };
     handleSubmitLogin = (e) => {
         e.preventDefault();
+        if (this.state.usernameRegister === '' || this.state.passwordRegister === ''  ) {
+            return alert('Your fields are empty')
+        }
         const {history} = this.props;
         let loginDate = {
             username: this.state.usernameLogin,

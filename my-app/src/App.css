@@ -17,3 +17,7 @@
     min-height: calc(100vh - 85px);
     background-color: #2b2d3c;
 }
+.main {
+    flex: 1;
+    padding: 25px;
+}

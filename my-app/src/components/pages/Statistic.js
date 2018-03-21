@@ -3,7 +3,7 @@ import React from 'react'
 class Statistic extends React.Component {
     render() {
         return (
-            <div>
+            <div className="section-statistic show">
                 <h1>Statistic</h1>
             </div>
         )

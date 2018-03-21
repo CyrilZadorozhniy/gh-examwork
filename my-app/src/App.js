@@ -59,7 +59,7 @@ class PrivateLayout extends React.Component {
             }
             if (this.state.check){
                 return (
-                    <div className="site-body">
+                    <div className="site-body show">
                         <HeaderSite/>
                         <div className="leftbar-main-wrap">
                             <LeftBar/>

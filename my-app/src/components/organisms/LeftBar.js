@@ -4,8 +4,22 @@ import { NavLink } from 'react-router-dom';
 
 //Material
 import IconButton from 'material-ui/IconButton';
+import Badge from 'material-ui/Badge';
 
 class LeftBar extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            notification: false
+        }
+    }
+    componentDidMount() {
+        setTimeout(()=>{
+            this.setState({
+                notification: true,
+            })
+        },3000);
+    }
     render() {
         return (
             <div className="leftbar">
@@ -35,7 +49,13 @@ class LeftBar extends React.Component {
                         <li>
                             <IconButton style={{padding:0}}>
                                 <NavLink to='/inbox'  exact activeClassName="nav-active">
-                                    <i className="material-icons">email</i>
+                                    <Badge
+                                        style={{padding: 0}}
+                                        primary={true}
+                                        badgeStyle={this.state.notification ?{backgroundColor:'#2196f3',top: -2, right: -5, border: '2px solid #2f3242',width: 14,height:14}:{display:'none'}}
+                                    >
+                                        <i className="material-icons">email</i>
+                                    </Badge>
                                 </NavLink>
                             </IconButton>
                         </li>

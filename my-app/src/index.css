@@ -4,5 +4,15 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 * {
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
+}
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1}
+}
+.show {
+    animation-name: show;
+    animation-duration: 2s;
 }
