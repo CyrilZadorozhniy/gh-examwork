@@ -1,0 +1,32 @@
+.text-plus-btn {
+    transition: .2s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 13px 32px;
+    border: 2px solid #2196f3;
+    border-radius: 40px;
+}
+.text-plus-btn:after {
+    content: "+";
+    color: #2196f3;
+    font-size: 35px;
+    transition: .2s;
+     font-weight: 400;
+    line-height: 18px;
+    margin-left: 15px;
+}
+.text-plus-btn:active::after{
+    transform: rotate(90deg);
+}
+.text-plus-btn:hover {
+    transform: scale(1.05);
+}
+.text-plus-btn:active {
+    transform: scale(1);
+}

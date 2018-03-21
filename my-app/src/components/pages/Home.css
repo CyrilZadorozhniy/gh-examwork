@@ -1,0 +1,70 @@
+h1 {
+    margin: 0;
+    color: rgba(33, 150, 243, 0.6);
+}
+h2 {
+    color: rgba(33, 150, 243, 0);
+}
+.highcharts-axis {
+    display: none;
+}
+.highcharts-yaxis-labels  {
+  display: none;
+}
+.highcharts-xaxis-labels {
+    transform: translateY(-8%);
+    font-size: 16px;
+}
+.highcharts-xaxis-labels text {
+    color: #9ca1b2;
+    text-transform: uppercase;
+    font-weight: 500!important;
+    font-size: 16px!important;
+}
+.CircularProgressbar-trail  {
+    stroke: rgba(156, 161, 178, 0.3) !important;
+}
+.high-chatrt {
+    position: relative;
+}
+.circular-progress-list {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    width: 60%;
+}
+.circular-progress-list li {
+    display: flex;
+}
+.circular-progress-list li .circular-progress-wrap{
+    max-width: 76px;
+}
+.circular-progress-list li .text-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25px;
+}
+.circular-progress-list li .text-wrap p {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+}
+.circular-progress-list li .text-wrap span {
+    font-size: 16px;
+    color: #9ca1b2;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.highcharts-label {
+    z-index: 3;
+    position: relative;
+}
