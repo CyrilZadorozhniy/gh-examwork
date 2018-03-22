@@ -8,24 +8,45 @@ h2 {
 .highcharts-axis {
     display: none;
 }
-.highcharts-yaxis-labels  {
+.section-home {
+    display: flex;
+    flex-wrap: wrap;
+}
+ .highcharts-yaxis-labels  {
   display: none;
 }
-.highcharts-xaxis-labels {
+ .highcharts-credits {
+     display: none;
+ }
+.high-chatrt .highcharts-xaxis-labels {
     transform: translateY(-8%);
     font-size: 16px;
 }
-.highcharts-xaxis-labels text {
+.high-chatrt .highcharts-xaxis-labels text {
     color: #9ca1b2;
     text-transform: uppercase;
     font-weight: 500!important;
     font-size: 16px!important;
 }
+.high-chatrt .highcharts-container {
+    position: inherit !important;
+}
+.high-chatrt .highcharts-tooltip {
+    z-index: 9998!important;
+}
 .CircularProgressbar-trail  {
     stroke: rgba(156, 161, 178, 0.3) !important;
 }
 .high-chatrt {
+    background-color: #2f3242;
     position: relative;
+    margin: 12px;
+    max-width: calc(100% - 375px);
+    width: 100%;
+}
+.high-chatrt .highcharts-halo {
+    fill: rgb(33, 150, 243)!important;
+    fill-opacity: 1!important;
 }
 .circular-progress-list {
     position: absolute;
@@ -50,7 +71,7 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 25px;
+    margin-left: 15px;
 }
 .circular-progress-list li .text-wrap p {
     font-size: 22px;
@@ -64,7 +85,104 @@ h2 {
     font-weight: 400;
     text-transform: uppercase;
 }
-.highcharts-label {
-    z-index: 3;
-    position: relative;
+
+.your-projects-card {
+    display: block;
+    width: 325px;
+    max-width: 325px;
+    height: 350px;
+    margin: 12px;
+    background-color: #2f3242;
+}
+.your-projects-card header {
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    color: #fff;
+    align-items: center;
+    background-color: #3a3e52;
+}
+.your-projects-card header h3 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 400;
+}
+.high-chatrt-reports {
+    background-color: #2f3242;
+    margin: 12px;
+    max-width: calc(100% - 725px);
+    width: 100%;
+}
+.high-chatrt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 25px;
+}
+.high-chatrt-header h3{
+    margin: 0;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 500;
+}
+.calendar-card {
+    background-color: #2f3242;
+    border: none;
+    display: block;
+    width: 325px;
+    max-width: 325px;
+    height: 350px;
+    margin: 12px;
+}
+.calendar-card .react-calendar {
+    background-color: #2f3242;
+    border: none;
+}
+.calendar-card .react-calendar .react-calendar__month-view__days button {
+    border-radius: 50%;
+}
+.calendar-card .react-calendar .react-calendar__month-view  {
+    padding: 0 21px;
+}
+.calendar-card .react-calendar .react-calendar__month-view__days__day--neighboringMonth {
+    color: #9ea3b4!important;
+}
+.calendar-card .react-calendar .react-calendar__month-view__days button{
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+.calendar-card .react-calendar .react-calendar__navigation button:hover {
+    background-color: #3a3e52;
+    border: none;
+}
+.calendar-card .react-calendar .react-calendar__navigation button {
+    background-color: #3a3e52!important;
+}
+.calendar-card .react-calendar .react-calendar__navigation button:active {
+    background-color: #3a3e52;
+    border: none;
+}
+.calendar-card .react-calendar .react-calendar__navigation__label{
+    color: #fff;
+    font-size: 24px;
+}
+.calendar-card .react-calendar .react-calendar__navigation__arrow {
+    color: #9ea3b4;
+    font-size: 28px;
+}
+.calendar-card .react-calendar .react-calendar__navigation__next2-button {
+   display: none;
+}
+.calendar-card .react-calendar .react-calendar__navigation__prev2-button {
+   display: none;
+}
+.calendar-card .react-calendar .react-calendar__month-view__weekdays {
+   color: #9ea3b4;
+    font-size: 13px;
+    font-weight: 500;
+}
+.calendar-card .react-calendar .react-calendar__navigation {
+    height: 70px;
+    background-color: #3a3e52;
 }

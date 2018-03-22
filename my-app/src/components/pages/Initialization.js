@@ -71,7 +71,7 @@ class Initialization extends React.Component {
     };
     handleSubmitLogin = (e) => {
         e.preventDefault();
-        if (this.state.usernameRegister === '' || this.state.passwordRegister === ''  ) {
+        if (this.state.usernameLogin === '' || this.state.passwordLogin === ''  ) {
             return alert('Your fields are empty')
         }
         const {history} = this.props;

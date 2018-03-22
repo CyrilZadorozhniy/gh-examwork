@@ -1,7 +1,7 @@
-const HomeHightChart = {
+const HomeHighChart = {
     chart: {
-        margin: [-27, -300, 0, -300],
-        height: 400,
+        margin: [-27, -250, 0, -250],
+        height: 350,
         backgroundColor: '#2f3242',
         type: 'areaspline'
     },
@@ -23,13 +23,13 @@ const HomeHightChart = {
         reversed: false,
         gridLineWidth: 1,
         categories: [
-            'Mon',
+            'Sun',
             'Mon',
             'Tue',
             'Wed',
             'Thu',
             'Fri',
-            'Fri',
+            'Sut',
         ],
 
     },
@@ -44,9 +44,18 @@ const HomeHightChart = {
     },
     plotOptions: {
         areaspline: {
-            fillOpacity: 0.5
+            fillOpacity: 0.5,
         },
         series: {
+            marker: {
+                states: {
+                    hover: {
+                        fillColor: '#FFFFFF',
+                        lineWidth: 3,
+                        lineColor: '#2f3242'
+                    }
+                }
+            },
             liheWidth: 3,
             fillColor: {
                 linearGradient: {
@@ -60,7 +69,6 @@ const HomeHightChart = {
                     [1, 'rgba(33, 150, 243, 0.3)']
                 ]
             },
-
         }
     },
     series: [{
@@ -73,4 +81,4 @@ const HomeHightChart = {
         },
     }]
 };
-export default HomeHightChart
+export default HomeHighChart

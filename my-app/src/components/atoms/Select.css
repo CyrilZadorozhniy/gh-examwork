@@ -1,0 +1,28 @@
+.label {
+display: flex;
+    align-items: center;
+}
+.label p{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    margin-right: 15px;
+    color: #9ea3b4;
+}
+select {
+    border: 1px solid #9ea3b4;
+    padding: 8px 10px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    background: none;
+    font-weight: 500;
+    color: #9ea3b4;
+    width: 130px;
+    max-width: 130px;
+}
+select:before {
+   content: 'qwe';
+    display: block;
+}
