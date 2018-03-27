@@ -31,6 +31,7 @@
     display: flex;
     list-style-type: none;
     padding-left: 0;
+    margin: 10px;
 }
 .initialization-site .initialization-body .initialization-header .tabs-bar .tabs-list li {
     text-align: center;

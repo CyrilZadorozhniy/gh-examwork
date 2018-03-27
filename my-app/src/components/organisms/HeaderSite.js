@@ -4,6 +4,8 @@ import Logo from '../../assets/img/logo.png';
 import { withRouter } from 'react-router';
 import TextPlusBtn from '../atoms/btn/TextPlusBtn';
 import IconBtn from '../atoms/btn/IconBtn'
+
+import UserAvatar from '../../assets/img/avatar.png'
 //Material
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
@@ -82,15 +84,15 @@ class HeaderSite extends React.Component {
                 <TextPlusBtn title='Add' style={{marginRight: 25}}/>
                 <IconBtn icon="search" style={{padding:0,color:'#fff',marginRight: 25}}/>
                     <Badge
+                        badgeContent={1}
                         style={{padding: 0, paddingRight: 20,marginRight:25}}
-                        primary={true}
-                        badgeStyle={{backgroundColor:'#2196f3',top: 8, right: 29, border: '2px solid #2f3242',width: 14,height:14}}
+                        badgeStyle={{ color:'#2196f3',backgroundColor:'#2196f3',top: 8, right: 29, border: '2px solid #2f3242',width: 14,height:14}}
                     >
                         <IconBtn icon="notifications_none" style={{padding:0,color:'#fff'}}/>
                     </Badge>
                     <div className="avatar-button">
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
-                            <Avatar  size={50}/>
+                            <Avatar src={ UserAvatar }  size={50}/>
                         </IconButton>
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
                             <i className="material-icons">keyboard_arrow_down</i>

@@ -6,7 +6,7 @@ display: flex;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    margin-right: 15px;
+    margin:0 15px 0 0;
     color: #9ea3b4;
 }
 select {
@@ -19,8 +19,7 @@ select {
     background: none;
     font-weight: 500;
     color: #9ea3b4;
-    width: 130px;
-    max-width: 130px;
+    min-width: 100px;
 }
 select:before {
    content: 'qwe';

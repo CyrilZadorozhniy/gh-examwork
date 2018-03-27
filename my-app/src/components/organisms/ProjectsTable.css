@@ -1,0 +1,15 @@
+tr {
+    border-bottom: 10px solid #2b2d3c!important;
+}
+.blue-project {
+    border-left: 4px solid #2196f3;
+    background-color: #3a3e52;
+}
+.white-project {
+    border-left: 4px solid #e2e3e8;
+    background-color: #3a3e52;
+}
+.green-project {
+    border-left: 4px solid #4caf50;
+    background-color: #3a3e52;
+}

@@ -34,7 +34,7 @@ class LeftBar extends React.Component {
                         </li>
                         <li>
                             <IconButton style={{padding:0}}>
-                                <NavLink to='/projects'  exact activeClassName="nav-active">
+                                <NavLink to='/projects/all'  exact activeClassName="nav-active">
                                     <i className="material-icons">menu</i>
                                 </NavLink>
                             </IconButton>
@@ -51,8 +51,9 @@ class LeftBar extends React.Component {
                                 <NavLink to='/inbox'  exact activeClassName="nav-active">
                                     <Badge
                                         style={{padding: 0}}
+                                        badgeContent={0}
                                         primary={true}
-                                        badgeStyle={this.state.notification ?{backgroundColor:'#2196f3',top: -2, right: -5, border: '2px solid #2f3242',width: 14,height:14}:{display:'none'}}
+                                        badgeStyle={this.state.notification ?{color:'#2196f3',backgroundColor:'#2196f3',top: -2, right: -5, border: '2px solid #2f3242',width: 14,height:14}:{display:'none'}}
                                     >
                                         <i className="material-icons">email</i>
                                     </Badge>

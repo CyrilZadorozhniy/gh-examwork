@@ -85,9 +85,9 @@ class App extends Component {
             <Route  exact path='/initialization' component={ Initialization }/>
 
             <PrivateLayout exact path="/" component={ Home }/>
-            <PrivateLayout exact path="/projects" component={ Inbox }/>
-            <PrivateLayout exact path="/statistic" component={ Projects }/>
-            <PrivateLayout exact path="/inbox" component={ Statistic }/>
+            <PrivateLayout path="/projects/" component={ Projects }/>
+            <PrivateLayout exact path="/statistic" component={ Statistic }/>
+            <PrivateLayout exact path="/inbox" component={ Inbox }/>
             <PrivateLayout exact path="/users" component={ Users }/>
           </Switch>
     );
