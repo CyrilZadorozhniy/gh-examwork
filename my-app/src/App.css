@@ -21,6 +21,7 @@
     flex: 1;
     height: calc(100vh - 85px);
     overflow-y: overlay;
+    box-shadow: inset 5px 5px 43px -13px rgba(8, 8, 8, 0.45);
 }
 .main::-webkit-scrollbar {
     width: 12px;

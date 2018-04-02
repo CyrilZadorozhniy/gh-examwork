@@ -1,0 +1,51 @@
+.section-statistic .high-chatrt {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+.section-statistic .high-chatrt .select-label{
+    position: absolute;
+    top: 40px;
+    right: 20px
+ }
+.statistic-table {
+    width: 100%;
+}
+.statistic-table .material-icons {
+   transition: .2s;
+}
+.statistic-table thead tr {
+    width: 100%;
+    background-color: #3a3e52;
+}
+.statistic-table thead tr th {
+    color: #9ca1b2;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px;
+    margin: 0;
+}
+.statistic-table thead tr th p{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    cursor: pointer;
+    transition: .2s;
+}
+.statistic-table tbody tr {
+    background-color: #2b2d3c;
+    border-bottom: 1px solid rgba(156, 161, 178, 0.3);
+}
+.statistic-table tbody tr td{
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px;
+    margin: 0;
+}
+.active-table-btn {
+    color: #ffffff;
+}
+.active-table-btn i {
+    transform: rotate(180deg);
+}

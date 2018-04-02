@@ -1,8 +1,8 @@
-.label {
+.select-label {
 display: flex;
     align-items: center;
 }
-.label p{
+.select-label p{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;

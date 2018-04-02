@@ -34,7 +34,7 @@ class LeftBar extends React.Component {
                         </li>
                         <li>
                             <IconButton style={{padding:0}}>
-                                <NavLink to='/projects/all'  exact activeClassName="nav-active">
+                                <NavLink to='/projects' activeClassName="nav-active">
                                     <i className="material-icons">menu</i>
                                 </NavLink>
                             </IconButton>

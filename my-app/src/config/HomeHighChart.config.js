@@ -34,7 +34,6 @@ const HomeHighChart = {
 
     },
     yAxis: {
-        max: 6,
         gridLineWidth: 0,
         enabled:false
     },

@@ -81,11 +81,9 @@ class App extends Component {
   render() {
     return (
           <Switch>
-
             <Route  exact path='/initialization' component={ Initialization }/>
-
             <PrivateLayout exact path="/" component={ Home }/>
-            <PrivateLayout path="/projects/" component={ Projects }/>
+            <PrivateLayout path="/projects" component={ Projects }/>
             <PrivateLayout exact path="/statistic" component={ Statistic }/>
             <PrivateLayout exact path="/inbox" component={ Inbox }/>
             <PrivateLayout exact path="/users" component={ Users }/>

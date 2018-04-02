@@ -65,6 +65,8 @@ class Home extends React.Component {
             document.getElementsByClassName('react-calendar__navigation__label')[0].textContent = month[0]
             let salesReportHighChart = this.refs.salesReportHighChart.getChart();
             salesReportHighChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
+            let homeHighChart = this.refs.homeHighChart.getChart();
+            homeHighChart.series[0].setData(this.state.charts.salesChart.lastWeek,true);
         }
     };
     changeCalendarTitle = () => {
