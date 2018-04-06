@@ -8,12 +8,13 @@ import CircularProgress from 'material-ui/CircularProgress';
 import HeaderSite from './components/organisms/HeaderSite';
 import LeftBar from './components/organisms/LeftBar';
 //Pages
-import Home from './components/pages/Home'
-import Inbox from './components/pages/Inbox'
-import Projects from './components/pages/Projects'
-import Statistic from './components/pages/Statistic'
-import Users from './components/pages/Users'
-import Initialization from './components/pages/Initialization'
+import Home from './components/pages/Home';
+import Inbox from './components/pages/Inbox';
+import Projects from './components/pages/Projects';
+import Statistic from './components/pages/Statistic';
+import Users from './components/pages/Users';
+import Initialization from './components/pages/Initialization';
+import Settings from './components/pages/Settings';
 
 class PrivateLayout extends React.Component {
     constructor(props) {
@@ -87,6 +88,7 @@ class App extends Component {
             <PrivateLayout exact path="/statistic" component={ Statistic }/>
             <PrivateLayout exact path="/inbox" component={ Inbox }/>
             <PrivateLayout exact path="/users" component={ Users }/>
+            <PrivateLayout exact path="/settings" component={ Settings }/>
           </Switch>
     );
   }

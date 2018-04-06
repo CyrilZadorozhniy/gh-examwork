@@ -52,8 +52,7 @@ class Workflow extends React.Component {
             },
             sort:true,
             onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-
+                var itemEl = evt.item;// dragged HTMLElement
             },
             animation: 200
         });
@@ -64,7 +63,6 @@ class Workflow extends React.Component {
             sort:true,
             onEnd: function (/**Event*/evt) {
                 var itemEl = evt.item;  // dragged HTMLElement
-
             },
             animation: 200
         });
@@ -186,16 +184,6 @@ class Workflow extends React.Component {
         }
     };
 
-    onDragStart = (ev, id) => {
-        console.log(ev,id);
-        ev.dataTransfer.setData("id", id);
-    };
-    onDragOver = (ev) => {
-        console.log('bbb',ev)
-    };
-    onDrop = (ev) => {
-        console.log('aaa',ev)
-    };
     render() {
         let tasks = {
             quened: [],
@@ -214,7 +202,7 @@ class Workflow extends React.Component {
                     return (t.assignedTo === worker.mail)
                 });
                 tasks[t.status.toLowerCase()].push(
-                    <li className="task" id={t.id} key={t.id} onDragStart={(e) => this.onDragStart(e, t.id)}>
+                    <li className="task" id={t.id} key={t.id}>
                         <Avatar src={worker[0].img} size={42}/>
                         <div>
                             <p className="task-name">{t.nameProject}</p>
@@ -240,7 +228,7 @@ class Workflow extends React.Component {
         return (
             <div className="workflow show">
                <ul className="workflow-board-list">
-                   <li className="board"   onDragOver={() => this.onDragOver('Quened')} >
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                 <h4>Quened</h4>
@@ -248,11 +236,11 @@ class Workflow extends React.Component {
                            </div>
                            <i className="material-icons">keyboard_arrow_right</i>
                        </header>
-                       <ul className="task-list" id="quened" onDrop={() => this.onDrop('Quened')}>
+                       <ul className="task-list" id="quened" >
                            {tasks.quened}
                        </ul>
                    </li>
-                   <li className="board" onDrop={() => this.onDrop('Planning')}  onDragOver={() => this.onDragOver('Planning')}>
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                <h4>Planning</h4>
@@ -264,7 +252,7 @@ class Workflow extends React.Component {
                            {tasks.planning}
                        </ul>
                    </li>
-                   <li className="board" onDrop={() => this.onDrop('Design')}  onDragOver={() => this.onDragOver('Design')}>
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                <h4>Design</h4>
@@ -276,7 +264,7 @@ class Workflow extends React.Component {
                            {tasks.design}
                        </ul>
                    </li>
-                   <li className="board" onDrop={() => this.onDrop('Development')}  onDragOver={() => this.onDragOver('Development')}>
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                <h4>Development</h4>
@@ -288,7 +276,7 @@ class Workflow extends React.Component {
                            {tasks.development}
                        </ul>
                    </li>
-                   <li className="board" onDrop={() => this.onDrop('Testing')}  onDragOver={() => this.onDragOver('Testing')}>
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                <h4>Testing</h4>
@@ -300,7 +288,7 @@ class Workflow extends React.Component {
                            {tasks.testing}
                        </ul>
                    </li>
-                   <li className="board" onDrop={() => this.onDrop('Completed')}  onDragOver={() => this.onDragOver('Completed')}>
+                   <li className="board">
                        <header className="board-header" >
                            <div className="content-wrap">
                                <h4>Completed</h4>
@@ -319,7 +307,7 @@ class Workflow extends React.Component {
 }
 const  mapState = (state, props) => {
     return {
-        dndChangeBoard: state.changeTask
+        draggableTask: state.graggableTask
     }
 };
 export default connect(mapState)(Workflow)

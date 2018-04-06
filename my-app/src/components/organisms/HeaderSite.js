@@ -2,9 +2,10 @@ import React from 'react';
 import './HeaderSite.css';
 import Logo from '../../assets/img/logo.png';
 import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import TextPlusBtn from '../atoms/btn/TextPlusBtn';
-import IconBtn from '../atoms/btn/IconBtn'
+import IconBtn from '../atoms/btn/IconBtn';
+import { connect } from 'react-redux';
 
 import UserAvatar from '../../assets/img/avatar.png'
 //Material
@@ -126,6 +127,23 @@ class HeaderSite extends React.Component {
             searchBth: !this.state.searchBth
         })
     };
+    settingsPage = () => {
+        const { history } = this.props;
+        history.push('/settings');
+        this.handleRequestClose();
+    };
+    avatarSize = () => {
+        switch (this.props.avatarSize) {
+            case 'Large' :
+                return 50;
+            case 'Middle' :
+                return 45;
+            case 'Small' :
+                return 42;
+            default:
+                return 50;
+        }
+    };
     render() {
         const actions = [
             <FlatButton
@@ -151,7 +169,7 @@ class HeaderSite extends React.Component {
                         <div className="search-wrap" style={this.state.searchBth ? {width:'auto'} : {width: 0}}>
                             <input className="search-text-field" style={this.state.searchBth ? {width:'auto'} : {width: 0,border:'none',padding:0}} type="text"/>
                         </div>
-                        <IconBtn icon="search" style={{padding:0,color:'#fff',marginRight: 25}} onClick={this.searchBth}/>
+                        <IconBtn icon={this.state.searchBth ? "close" : "search"} style={{padding:0,color:'#fff',marginRight: 25}} onClick={this.searchBth}/>
                     </form>
                     <Badge
                         badgeContent={1}
@@ -205,7 +223,7 @@ class HeaderSite extends React.Component {
                     </Badge>
                     <div className="avatar-button">
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
-                            <Avatar src={ UserAvatar }  size={50}/>
+                            <Avatar src={ UserAvatar }  size={this.avatarSize()}/>
                         </IconButton>
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
                             <i className="material-icons">keyboard_arrow_down</i>
@@ -218,9 +236,7 @@ class HeaderSite extends React.Component {
                             onRequestClose={this.handleRequestClose}
                         >
                             <Menu>
-                                <MenuItem primaryText="Refresh" />
-                                <MenuItem primaryText="Help &amp; feedback" />
-                                <MenuItem primaryText="Settings" />
+                                <MenuItem primaryText="Settings" onClick={this.settingsPage} />
                                 <MenuItem primaryText="Sign out" onClick={this.handleSignOut} />
                             </Menu>
                         </Popover>
@@ -239,4 +255,9 @@ class HeaderSite extends React.Component {
         )
     }
 }
-export default withRouter(HeaderSite)
+const  mapState = (state, props) => {
+    return {
+        avatarSize: state.avatarSize
+    }
+};
+export default connect(mapState)(withRouter(HeaderSite))
