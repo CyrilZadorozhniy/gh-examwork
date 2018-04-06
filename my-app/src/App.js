@@ -16,6 +16,7 @@ import Users from './components/pages/Users';
 import Initialization from './components/pages/Initialization';
 import Settings from './components/pages/Settings';
 
+
 class PrivateLayout extends React.Component {
     constructor(props) {
         super(props);

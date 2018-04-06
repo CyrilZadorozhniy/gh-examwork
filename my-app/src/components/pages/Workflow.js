@@ -1,8 +1,8 @@
 import React from 'react';
 import './Workflow.css';
-import Sortable from 'sortablejs/Sortable.min';
-import { connect } from 'react-redux'
-import store from '../../redux/store'
+import Sortable from 'react-sortablejs';
+import { connect } from 'react-redux';
+import store from '../../redux/store';
 
 //Material
 import Avatar from 'material-ui/Avatar';
@@ -11,7 +11,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-class Workflow extends React.Component {
+class Testing extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -43,81 +43,14 @@ class Workflow extends React.Component {
                 this.filterProjects(store.getState().company)
             });
     }
-    componentDidMount() {
-        var quened = document.getElementById('quened');
-        var sortable = Sortable.create(quened,{
-            ghostClass: 'ghost',
-            group: {
-                name: "taskBoard",
-            },
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;// dragged HTMLElement
-            },
-            animation: 200
-        });
-        var planning = document.getElementById('planning');
-        var sortable = Sortable.create(planning,{
-            ghostClass: 'ghost',
-            group: "taskBoard",
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-            },
-            animation: 200
-        });
-        var design = document.getElementById('design');
-        var sortable = Sortable.create(design,{
-            ghostClass: 'ghost',
-            group: "taskBoard",
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-
-            },
-            animation: 200
-        });
-        var development = document.getElementById('development');
-        var sortable = Sortable.create(development,{
-            ghostClass: 'ghost',
-            group: "taskBoard",
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-
-            },
-            animation: 200
-        });
-        var testing = document.getElementById('testing');
-        var sortable = Sortable.create(testing,{
-            ghostClass: 'ghost',
-            group: "taskBoard",
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-
-            },
-            animation: 200
-        });
-        var completed = document.getElementById('completed');
-        var sortable = Sortable.create(completed,{
-            ghostClass: 'ghost',
-            group: "taskBoard",
-            sort:true,
-            onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-            },
-            animation: 200
-        });
-    };
     projectSum = (el) => {
         let sum = 0;
-       this.state.filterProjects.forEach(t => {
-          if (el === t.status) {
-              sum += t.price
-          }
-       });
-       return sum
+        this.state.filterProjects.forEach(t => {
+            if (el === t.status) {
+                sum += t.price
+            }
+        });
+        return sum
     };
     boardChange = (taskId, board) => {
         this.setState({
@@ -227,80 +160,212 @@ class Workflow extends React.Component {
         };
         return (
             <div className="workflow show">
-               <ul className="workflow-board-list">
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
+                <ul className="workflow-board-list">
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
                                 <h4>Quened</h4>
                                 <p>{tasks.quened.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Quened')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="quened" >
-                           {tasks.quened}
-                       </ul>
-                   </li>
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
-                               <h4>Planning</h4>
-                               <p>{tasks.planning.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Planning')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="planning">
-                           {tasks.planning}
-                       </ul>
-                   </li>
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
-                               <h4>Design</h4>
-                               <p>{tasks.design.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Design')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="design">
-                           {tasks.design}
-                       </ul>
-                   </li>
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
-                               <h4>Development</h4>
-                               <p>{tasks.development.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Development')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="development">
-                           {tasks.development}
-                       </ul>
-                   </li>
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
-                               <h4>Testing</h4>
-                               <p>{tasks.testing.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Testing')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="testing">
-                           {tasks.testing}
-                       </ul>
-                   </li>
-                   <li className="board">
-                       <header className="board-header" >
-                           <div className="content-wrap">
-                               <h4>Completed</h4>
-                               <p>{tasks.completed.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Completed')}</span></p>
-                           </div>
-                           <i className="material-icons">keyboard_arrow_right</i>
-                       </header>
-                       <ul className="task-list" id="completed">
-                           {tasks.completed}
-                       </ul>
-                   </li>
-               </ul>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Quened'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.quened}
+                        </Sortable>
+                    </li>
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
+                                <h4>Planning</h4>
+                                <p>{tasks.planning.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Planning')}</span></p>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Planning'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.planning}
+                        </Sortable>
+                    </li>
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
+                                <h4>Design</h4>
+                                <p>{tasks.design.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Design')}</span></p>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Design'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.design}
+                        </Sortable>
+                    </li>
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
+                                <h4>Development</h4>
+                                <p>{tasks.development.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Development')}</span></p>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Development'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.development}
+                        </Sortable>
+                    </li>
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
+                                <h4>Testing</h4>
+                                <p>{tasks.testing.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Testing')}</span></p>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Testing'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.testing}
+                        </Sortable>
+                    </li>
+                    <li className="board">
+                        <header className="board-header" >
+                            <div className="content-wrap">
+                                <h4>Completed</h4>
+                                <p>{tasks.completed.length} project · <span>${this.state.loadingProjects? null :this.projectSum('Completed')}</span></p>
+                            </div>
+                            <i className="material-icons">keyboard_arrow_right</i>
+                        </header>
+                        <Sortable
+                            // See all Sortable options at https://github.com/RubaXa/Sortable#options
+                            className="task-list"
+                            options={{
+                                group: 'shared',
+                                ghostClass:'ghost',
+                                animation:150,
+                            }}
+                            tag="ul"
+                            onChange={(order, sortable, evt) => {
+                                this.setState({
+                                    filterProjects: this.state.filterProjects.map(project => {
+                                        if(project.id === evt.item.id) {
+                                            project.status = 'Completed'
+                                            return project
+                                        } else {
+                                            return project
+                                        }
+                                    })
+                                })
+                            }}
+
+                        >
+                            {tasks.completed}
+                        </Sortable>
+                    </li>
+                </ul>
             </div>
         )
     }
@@ -310,4 +375,4 @@ const  mapState = (state, props) => {
         draggableTask: state.graggableTask
     }
 };
-export default connect(mapState)(Workflow)
+export default connect(mapState)(Testing)
