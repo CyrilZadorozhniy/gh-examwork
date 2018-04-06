@@ -31,7 +31,15 @@ class HeaderSite extends React.Component {
         this.state = {
             Popover: false,
             signOutDialog: false,
+            notification: false,
         };
+    }
+    componentDidMount() {
+        setTimeout(()=>{
+            this.setState({
+                notification: true,
+            })
+        },3000);
     }
     handleClick = (event) => {
         // This prevents ghost click.
@@ -86,7 +94,7 @@ class HeaderSite extends React.Component {
                     <Badge
                         badgeContent={1}
                         style={{padding: 0, paddingRight: 20,marginRight:25}}
-                        badgeStyle={{ color:'#2196f3',backgroundColor:'#2196f3',top: 8, right: 29, border: '2px solid #2f3242',width: 14,height:14}}
+                        badgeStyle={this.state.notification ? { color:'#2196f3',backgroundColor:'#2196f3',top: 8, right: 29, border: '2px solid #2f3242',width: 14,height:14}: {display:'none'}}
                     >
                         <IconBtn icon="notifications_none" style={{padding:0,color:'#fff'}}/>
                     </Badge>

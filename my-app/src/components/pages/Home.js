@@ -24,12 +24,41 @@ class Home extends React.Component {
             date: new Date(),
             loadingCharts: true,
             loadingProjects: true,
+            loadingChats: true,
         }
     }
     componentWillMount() {
         let data = {
             token: JSON.parse(localStorage.getItem("token"))
         };
+        fetch('/inbox')
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                this.setState({
+                    chats: res.chats.slice().sort((a,b) => {
+                        if (a.massages[a.massages.length - 1].viewed < b.massages[b.massages.length - 1].viewed) {
+                            return 1;
+                        }
+                        if (a.massages[a.massages.length - 1].viewed > b.massages[b.massages.length - 1].viewed) {
+                            return -1;
+                        }
+                        return 0;
+                    }).reverse(),
+                    filterChats: res.chats.slice().sort((a,b) => {
+                        if (a.massages[a.massages.length - 1].viewed < b.massages[b.massages.length - 1].viewed) {
+                            return 1;
+                        }
+                        if (a.massages[a.massages.length - 1].viewed > b.massages[b.massages.length - 1].viewed) {
+                            return -1;
+                        }
+                        return 0;
+                    }).reverse(),
+                    workers: res.workers,
+                    loadingChats: false
+                })
+            });
         fetch('/projects')
             .then(res => {
                 return res.json()
@@ -59,16 +88,16 @@ class Home extends React.Component {
                 });
             });
     }
-    componentDidMount() {
-        if (!this.state.loadingCharts || !this.state.loadingProjects) {
-            const month = document.getElementsByClassName('react-calendar__navigation__label')[0].textContent.split(' ');
-            document.getElementsByClassName('react-calendar__navigation__label')[0].textContent = month[0]
+    componentDidUpdate() {
+        if (!this.state.loadingCharts && !this.state.loadingProjects) {
             let salesReportHighChart = this.refs.salesReportHighChart.getChart();
             salesReportHighChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
             let homeHighChart = this.refs.homeHighChart.getChart();
             homeHighChart.series[0].setData(this.state.charts.salesChart.lastWeek,true);
+            const month = document.getElementsByClassName('react-calendar__navigation__label')[0].textContent.split(' ');
+            document.getElementsByClassName('react-calendar__navigation__label')[0].textContent = month[0]
         }
-    };
+    }
     changeCalendarTitle = () => {
         const month = document.getElementsByClassName('react-calendar__navigation__label')[0].textContent.split(' ');
         document.getElementsByClassName('react-calendar__navigation__label')[0].textContent = month[0]
@@ -87,6 +116,23 @@ class Home extends React.Component {
                 chart.series[0].setData(this.state.charts.reportsChart.lastWeek,true);
                 break;
         }
+    };
+    countIncomingChats = () => {
+        const incomingsChats = this.state.chats.slice().sort((a,b) => {
+            if (a.massages[a.massages.length - 1].viewed < b.massages[b.massages.length - 1].viewed) {
+                return 1;
+            }
+            if (a.massages[a.massages.length - 1].viewed > b.massages[b.massages.length - 1].viewed) {
+                return -1;
+            }
+            return 0;
+        }).reverse().filter(chat => {
+            return (!chat.delete && !chat.massages[chat.massages.length -1].my)
+        });
+        const dontViewdChat = incomingsChats.filter(chat => {
+            return (!chat.massages[chat.massages.length -1].viewed)
+        });
+        return dontViewdChat.length
     };
     render() {
         if (this.state.loadingCharts || this.state.loadingProjects) {
@@ -172,8 +218,40 @@ class Home extends React.Component {
                     </div>
                     <div className="your-projects-card">
                         <header>
-                            <h3>Your projects</h3>
+                            <h3>InBox(<span style={{color:'#2196f3'}}>{!this.state.loadingChats? this.countIncomingChats() : 0}</span>)</h3>
                         </header>
+                        <div className="card-body">
+                            {
+                                !this.state.loadingChats ?
+                                    <ul className="chats-list" >
+                                        {
+                                            this.state.filterChats.map(chat => {
+                                                const worker = this.state.workers.filter(worker => {
+                                                    return (chat.contactUser === worker.mail)
+                                                });
+                                                    if(chat.delete) {
+                                                        return null
+                                                    }
+                                                return (
+                                                    <li key={chat.id} className="chat">
+                                                        <Avatar src={worker[0].img}  size={42} style={{alignSelf: 'center',margin:10,minWidth: 42}}/>
+                                                        <div style={{display:'flex',flexDirection:'column',width: '100%'}}>
+                                                            <header className="chat-header">
+                                                                <h5>{worker[0].name}</h5>
+                                                                <span className="chat-date" style={(chat.massages[chat.massages.length - 1].viewed && chat.massages[chat.massages.length - 1].my) ? {color:'#9ca1b2'}: (chat.massages[chat.massages.length - 1].viewed && !chat.massages[chat.massages.length - 1].my)?{color:'#9ca1b2'}:(!chat.massages[chat.massages.length - 1].viewed && chat.massages[chat.massages.length - 1].my)?{color:'#9ca1b2'}:{color:'#2196f3'}}>{chat.massages[chat.massages.length - 1].time}</span>
+                                                            </header>
+                                                            <p className="last-massage">{chat.massages[chat.massages.length - 1].massage}</p>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+
+                                    </ul>
+
+                                    : null
+                            }
+                        </div>
                     </div>
                     <div className="calendar-card">
                         <Calendar

@@ -9,7 +9,7 @@ export default class Select extends React.Component {
     render() {
         return (
             <label className="select-label">
-                <p style={this.props.styleTitle}>Show:</p>
+                <p style={this.props.styleTitle}>{this.props.title ? this.props.title :'Show:'}</p>
                 <select style={this.props.style} onChange={this.handleChange}>
                     {
                         this.props.data.map((item, index) =>

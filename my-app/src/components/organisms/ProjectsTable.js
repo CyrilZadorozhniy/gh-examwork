@@ -99,7 +99,7 @@ class ProjectsTable extends React.Component {
         });
       return (
           <div style={{display:'flex',alignItems:'center'}}>
-              <Avatar src={worker[0].img}  size={42}/>
+              <Avatar src={worker[0].img} style={{minWidth:42}}  size={42}/>
               <div style={{flex:1,marginLeft:20}}>
                   <p style={{margin: 0,fontSize: 16, color:'#fff',fontWeight: 500}}>{worker[0].name}</p>
                   <span style={{fontSize: 14, color:'#9ea3b4'}}>{worker[0].position}</span>

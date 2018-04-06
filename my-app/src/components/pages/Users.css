@@ -1,0 +1,6 @@
+.section-users {
+    padding: 25px;
+}
+.section-users tr {
+    border-bottom: 10px solid #2b2d3c!important;
+}
