@@ -6,6 +6,9 @@ class IconBtn extends React.Component {
     render() {
         return (
             <IconButton style={this.props.style}
+                        id={this.props.id}
+                        className={this.props.className}
+                        onClick={this.props.onClick}
                         children={this.props.children}
                         disableTouchRipple={this.props.disableTouchRipple}
                         disabled={this.props.disabled}

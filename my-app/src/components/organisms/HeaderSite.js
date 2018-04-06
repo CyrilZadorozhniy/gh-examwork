@@ -2,6 +2,7 @@ import React from 'react';
 import './HeaderSite.css';
 import Logo from '../../assets/img/logo.png';
 import { withRouter } from 'react-router';
+import { Redirect } from 'react-router-dom'
 import TextPlusBtn from '../atoms/btn/TextPlusBtn';
 import IconBtn from '../atoms/btn/IconBtn'
 
@@ -30,9 +31,42 @@ class HeaderSite extends React.Component {
         super(props);
         this.state = {
             Popover: false,
+            PopoverInbox: false,
             signOutDialog: false,
             notification: false,
+            loadingChats: true,
+            searchBth: false,
         };
+    }
+    componentWillMount() {
+        fetch('/inbox')
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                this.setState({
+                    chats: res.chats.slice().sort((a,b) => {
+                        if (a.massages[a.massages.length - 1].viewed < b.massages[b.massages.length - 1].viewed) {
+                            return 1;
+                        }
+                        if (a.massages[a.massages.length - 1].viewed > b.massages[b.massages.length - 1].viewed) {
+                            return -1;
+                        }
+                        return 0;
+                    }).reverse(),
+                    filterChats: res.chats.slice().sort((a,b) => {
+                        if (a.massages[a.massages.length - 1].viewed < b.massages[b.massages.length - 1].viewed) {
+                            return 1;
+                        }
+                        if (a.massages[a.massages.length - 1].viewed > b.massages[b.massages.length - 1].viewed) {
+                            return -1;
+                        }
+                        return 0;
+                    }).reverse(),
+                    workers: res.workers,
+                    loadingChats: false
+                })
+            });
     }
     componentDidMount() {
         setTimeout(()=>{
@@ -50,9 +84,23 @@ class HeaderSite extends React.Component {
             anchorEl: event.currentTarget,
         });
     };
+    handleClickPopoverInbox = (event) => {
+        // This prevents ghost click.
+        event.preventDefault();
+
+        this.setState({
+            PopoverInbox: true,
+            anchorEl2: event.currentTarget,
+        });
+    };
     handleRequestClose = () => {
         this.setState({
             Popover: false,
+        });
+    };
+    handleRequestClosePopoverInbox = () => {
+        this.setState({
+            PopoverInbox: false,
         });
     };
     handleClose = (e) => {
@@ -64,10 +112,19 @@ class HeaderSite extends React.Component {
         } else {
             this.setState({signOutDialog: false});
         }
-
     };
     handleSignOut = () =>{
         this.setState({signOutDialog: true, Popover: false});
+    };
+    redirectInbox = () => {
+        const { history } = this.props;
+        history.push('/inbox');
+        this.handleRequestClosePopoverInbox();
+    };
+    searchBth = () => {
+        this.setState({
+            searchBth: !this.state.searchBth
+        })
     };
     render() {
         const actions = [
@@ -90,13 +147,61 @@ class HeaderSite extends React.Component {
                 </div>
                 <div className="header-right-side">
                 <TextPlusBtn title='Add' style={{marginRight: 25}}/>
-                <IconBtn icon="search" style={{padding:0,color:'#fff',marginRight: 25}}/>
+                    <form style={{display:'flex',alignItems:'center'}}>
+                        <div className="search-wrap" style={this.state.searchBth ? {width:'auto'} : {width: 0}}>
+                            <input className="search-text-field" style={this.state.searchBth ? {width:'auto'} : {width: 0,border:'none',padding:0}} type="text"/>
+                        </div>
+                        <IconBtn icon="search" style={{padding:0,color:'#fff',marginRight: 25}} onClick={this.searchBth}/>
+                    </form>
                     <Badge
                         badgeContent={1}
                         style={{padding: 0, paddingRight: 20,marginRight:25}}
                         badgeStyle={this.state.notification ? { color:'#2196f3',backgroundColor:'#2196f3',top: 8, right: 29, border: '2px solid #2f3242',width: 14,height:14}: {display:'none'}}
                     >
-                        <IconBtn icon="notifications_none" style={{padding:0,color:'#fff'}}/>
+                        <IconBtn icon="notifications_none" style={{padding:0,color:'#fff'}} onClick={this.handleClickPopoverInbox}/>
+                        <Popover
+                            open={this.state.PopoverInbox}
+                            anchorEl={this.state.anchorEl2}
+                            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                            onRequestClose={this.handleRequestClosePopoverInbox}
+                        >
+                            <Menu style={{backgroundColor:'#2f3242'}}>
+                                {
+                                    !this.state.loadingChats ?
+                                        <ul className="chats-list-notification" >
+                                            {
+                                                this.state.filterChats.map((chat,index) => {
+                                                    if (index >= 6) {
+                                                        return null
+                                                    }
+                                                    const worker = this.state.workers.filter(worker => {
+                                                        return (chat.contactUser === worker.mail);
+                                                    });
+                                                    if(chat.delete) {
+                                                        return null
+                                                    }
+                                                    return (
+                                                        <li key={chat.id} className="chat-notification" onClick={this.redirectInbox}>
+                                                            <Avatar src={worker[0].img}  size={42} style={{alignSelf: 'center',margin:10,minWidth: 42}}/>
+                                                            <div style={{display:'flex',flexDirection:'column',width: '100%'}}>
+                                                                <header className="chat-header">
+                                                                    <h5>{worker[0].name}</h5>
+                                                                    <span className="chat-date" style={(chat.massages[chat.massages.length - 1].viewed && chat.massages[chat.massages.length - 1].my) ? {color:'#9ca1b2'}: (chat.massages[chat.massages.length - 1].viewed && !chat.massages[chat.massages.length - 1].my)?{color:'#9ca1b2'}:(!chat.massages[chat.massages.length - 1].viewed && chat.massages[chat.massages.length - 1].my)?{color:'#9ca1b2'}:{color:'#2196f3'}}>{chat.massages[chat.massages.length - 1].time}</span>
+                                                                </header>
+                                                                <p className="last-massage">{chat.massages[chat.massages.length - 1].massage}</p>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+
+                                        </ul>
+
+                                        : null
+                                }
+                            </Menu>
+                        </Popover>
                     </Badge>
                     <div className="avatar-button">
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>

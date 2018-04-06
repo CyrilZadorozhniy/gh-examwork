@@ -132,7 +132,7 @@
 }
 .section-inbox .chat-correspondence .massage-content {
     display: flex;
-    max-width: 50%;
+    max-width: 400px;
     word-wrap: break-word;
     flex-direction: column;
 }
