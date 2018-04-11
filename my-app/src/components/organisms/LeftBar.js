@@ -44,7 +44,9 @@ class LeftBar extends React.Component {
     };
     render() {
         store.subscribe(() => {
-            this.leftBarToggle(store.getState().leftBarStatus)
+            if (store.getState().leftBarStatus !== undefined) {
+                this.leftBarToggle(store.getState().leftBarStatus)
+            }
         });
         return (
             <div className="leftbar" style={this.state.leftBarStatus ? {marginLeft:0}:{marginLeft:-85}}>
