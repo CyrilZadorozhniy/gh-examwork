@@ -9,6 +9,8 @@ const rootReducer = (state = initState, action) => {
             return {avatarSize: action.payload};
         case 'DRAGGABLE_TASK':
             return {draggableTask: action.payload};
+        case 'LEFTBAR_STATUS':
+            return {leftBarStatus: action.payload};
         default:
             return state;
     }

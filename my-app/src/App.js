@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Route , Switch, Redirect} from 'react-router-dom';
 import './App.css';
+import store from './redux/store'
 
-
+import Swipeable from 'react-swipeable';
 import CircularProgress from 'material-ui/CircularProgress';
 
 import HeaderSite from './components/organisms/HeaderSite';
@@ -80,17 +81,62 @@ class PrivateLayout extends React.Component {
   }
 }
 class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            responseMobile: false
+        }
+    }
+    updateDimensions = () => {
+        if(window.innerWidth < 700) {
+            this.setState({ responseMobile: true });
+        } else {
+            this.setState({ responseMobile: false });
+        }
+    };
+    componentWillMount() {
+        this.updateDimensions();
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
+    swipingLeft = (e, absX) => {
+        if (this.state.responseMobile) {
+            store.dispatch({
+                type:'LEFTBAR_STATUS',
+                payload: false
+            })
+        }
+    };
+    swipingRight = (e, absX) => {
+        if (this.state.responseMobile) {
+            store.dispatch({
+                type:'LEFTBAR_STATUS',
+                payload: true
+            })
+        }
+    };
   render() {
     return (
-          <Switch>
-            <Route  exact path='/initialization' component={ Initialization }/>
-            <PrivateLayout exact path="/" component={ Home }/>
-            <PrivateLayout path="/projects" component={ Projects }/>
-            <PrivateLayout exact path="/statistic" component={ Statistic }/>
-            <PrivateLayout exact path="/inbox" component={ Inbox }/>
-            <PrivateLayout exact path="/users" component={ Users }/>
-            <PrivateLayout exact path="/settings" component={ Settings }/>
-          </Switch>
+        <Swipeable
+            delta={200}
+            onSwiping={this.swiping}
+            onSwipingLeft={this.swipingLeft}
+            onSwipingRight={this.swipingRight}
+          >
+            <Switch>
+                <Route  exact path='/initialization' component={ Initialization }/>
+                <PrivateLayout exact path="/" component={ Home }/>
+                <PrivateLayout path="/projects" component={ Projects }/>
+                <PrivateLayout exact path="/statistic" component={ Statistic }/>
+                <PrivateLayout exact path="/inbox" component={ Inbox }/>
+                <PrivateLayout exact path="/users" component={ Users }/>
+                <PrivateLayout exact path="/settings" component={ Settings }/>
+            </Switch>
+        </Swipeable>
     );
   }
 }

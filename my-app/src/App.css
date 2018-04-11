@@ -1,9 +1,7 @@
-.site-body {
-
-}
 
 .leftbar-main-wrap {
     display: flex;
+    height: calc(100vh - 85px);
 }
 .leftbar {
     width: 85px;background: -moz-linear-gradient(312deg, rgba(55,58,77,1) 0%, rgba(50,53,70,1) 29%, rgba(47,50,66,1) 47%); /* ff3.6+ */

@@ -1,3 +1,6 @@
+.leftbar {
+    transition: .2s;
+}
 .navigation-list {
     list-style-type: none ;
     padding-left: 0;
@@ -25,3 +28,35 @@
     -o-transition: 1s ;
     transition: 1s ;
 }
+.swipeable-zone {
+    display: none;
+}
+@media (max-width: 700px) {
+    .leftbar {
+        overflow-y: scroll;
+    }
+    .leftbar::-webkit-scrollbar {
+        opacity: 0;
+        width: 0;
+    }
+
+    .leftbar::-webkit-scrollbar-track {
+        opacity: 0;
+    }
+
+    .leftbar::-webkit-scrollbar-thumb {
+        opacity: 0;
+    }
+    .swipeable-zone {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+

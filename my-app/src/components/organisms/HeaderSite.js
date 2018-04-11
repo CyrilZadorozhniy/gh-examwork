@@ -37,9 +37,18 @@ class HeaderSite extends React.Component {
             notification: false,
             loadingChats: true,
             searchBth: false,
+            responseMenuToggle: false,
         };
     }
+    updateDimensions = () => {
+        if(window.innerWidth < 700) {
+            this.setState({ responseMenuToggle: true });
+        } else {
+            this.setState({ responseMenuToggle: false });
+        }
+    };
     componentWillMount() {
+        this.updateDimensions();
         fetch('/inbox')
             .then(res => {
                 return res.json()
@@ -70,6 +79,7 @@ class HeaderSite extends React.Component {
             });
     }
     componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
         setTimeout(()=>{
             this.setState({
                 notification: true,
@@ -85,6 +95,9 @@ class HeaderSite extends React.Component {
             anchorEl: event.currentTarget,
         });
     };
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
     handleClickPopoverInbox = (event) => {
         // This prevents ghost click.
         event.preventDefault();
@@ -144,6 +157,11 @@ class HeaderSite extends React.Component {
                 return 50;
         }
     };
+    responseMenuToggle = () => {
+        this.setState({
+            responseMenuToggle: !this.state.responseMenuToggle
+        })
+    };
     render() {
         const actions = [
             <FlatButton
@@ -159,13 +177,18 @@ class HeaderSite extends React.Component {
         ];
         return (
             <header className="site-header">
-                <div className="wrap-logo">
-                    <img src={ Logo } alt=""/>
-                    <h1>qwe</h1>
+                <div className="header-left-side">
+                    <div className="wrap-logo">
+                        <img src={ Logo } alt=""/>
+                        <h1>qwe</h1>
+                    </div>
+                    <IconButton style={{display:'none'}} className="icon-btn" onClick={this.responseMenuToggle}>
+                        <i className="material-icons">menu</i>
+                    </IconButton>
                 </div>
-                <div className="header-right-side">
+                <div className="header-right-side toggle" style={this.state.responseMenuToggle ? {display:'none'}:null}>
                 <TextPlusBtn title='Add' style={{marginRight: 25}}/>
-                    <form style={{display:'flex',alignItems:'center'}}>
+                    <form className="search-form" style={{display:'flex',alignItems:'center'}}>
                         <div className="search-wrap" style={this.state.searchBth ? {width:'auto'} : {width: 0}}>
                             <input className="search-text-field" style={this.state.searchBth ? {width:'auto'} : {width: 0,border:'none',padding:0}} type="text"/>
                         </div>

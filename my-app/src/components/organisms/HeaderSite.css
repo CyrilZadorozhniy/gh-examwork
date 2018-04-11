@@ -23,14 +23,13 @@
 }
 .header-right-side {
     display: flex;
+    margin-right: 20px;
     align-items: center;
+    transition: .5s;
 }
 .avatar-button {
     display: flex;
     align-items: center;
-}
-.header-right-side {
-    margin-right: 20px;
 }
 .chats-list-notification {
     margin: 0;
@@ -91,4 +90,28 @@
      background-color: #404359;
      border-radius: 10px;
      border: 1px solid rgba(156, 161, 178, 0.3);
+ }
+ @media (max-width: 700px) {
+     .site-header {
+         flex-direction: column;
+         height: auto;
+         padding: 10px;
+     }
+     .site-header .header-left-side {
+         display: flex;
+         align-items: center;
+         width: 100%;
+         justify-content: space-between;
+     }
+     .site-header .header-right-side {
+         margin: 15px 0 0 0;
+     }
+     .site-header .search-form {
+         display: none !important;
+     }
+     .site-header .header-left-side .icon-btn {
+         display: block !important;
+         margin-left: 15px!important;
+         color: #ffffff !important;
+     }
  }

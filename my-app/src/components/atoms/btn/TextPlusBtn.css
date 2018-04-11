@@ -30,3 +30,9 @@
 .text-plus-btn:active {
     transform: scale(1);
 }
+@media (max-width: 700px) {
+    .text-plus-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

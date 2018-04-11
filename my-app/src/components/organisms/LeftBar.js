@@ -1,6 +1,8 @@
-import React from 'react'
-import './LeftBar.css'
+import React from 'react';
+import './LeftBar.css';
 import { NavLink } from 'react-router-dom';
+import store from '../../redux/store';
+
 
 //Material
 import IconButton from 'material-ui/IconButton';
@@ -10,19 +12,42 @@ class LeftBar extends React.Component {
     constructor() {
         super();
         this.state = {
-            notification: false
+            notification: false,
+            leftBarStatus: true
         }
     }
+    updateDimensions = () => {
+        if(window.innerWidth < 700) {
+            this.setState({ leftBarStatus: false });
+        } else {
+            this.setState({ leftBarStatus: true });
+        }
+    };
+    componentWillMount() {
+        this.updateDimensions();
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
+    }
     componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
         setTimeout(()=>{
             this.setState({
                 notification: true,
             })
         },3000);
     }
+    leftBarToggle = (el) => {
+        this.setState({
+            leftBarStatus: el
+        })
+    };
     render() {
+        store.subscribe(() => {
+            this.leftBarToggle(store.getState().leftBarStatus)
+        });
         return (
-            <div className="leftbar">
+            <div className="leftbar" style={this.state.leftBarStatus ? {marginLeft:0}:{marginLeft:-85}}>
                 <nav className="site-navigation">
                     <ul className="navigation-list">
                         <li>
