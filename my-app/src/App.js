@@ -88,7 +88,7 @@ class App extends Component {
         }
     }
     updateDimensions = () => {
-        if(window.innerWidth < 700) {
+        if(window.innerWidth <= 700) {
             this.setState({ responseMobile: true });
         } else {
             this.setState({ responseMobile: false });

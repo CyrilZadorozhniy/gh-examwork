@@ -162,6 +162,9 @@ class HeaderSite extends React.Component {
             responseMenuToggle: !this.state.responseMenuToggle
         })
     };
+    searchSubmit = (el) => {
+        el.preventDefault()
+    }
     render() {
         const actions = [
             <FlatButton
@@ -188,7 +191,7 @@ class HeaderSite extends React.Component {
                 </div>
                 <div className="header-right-side toggle" style={this.state.responseMenuToggle ? {display:'none'}:null}>
                 <TextPlusBtn title='Add' style={{marginRight: 25}}/>
-                    <form className="search-form" style={{display:'flex',alignItems:'center'}}>
+                    <form className="search-form" style={{display:'flex',alignItems:'center'}} onSubmit={this.searchSubmit}>
                         <div className="search-wrap" style={this.state.searchBth ? {width:'auto'} : {width: 0}}>
                             <input className="search-text-field" style={this.state.searchBth ? {width:'auto'} : {width: 0,border:'none',padding:0}} type="text"/>
                         </div>
